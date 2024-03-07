@@ -2,8 +2,10 @@ import Head from 'next/head';
 import React from 'react';
 import styles from '@/styles/Container.module.scss';
 import dynamic from 'next/dynamic';
+import { Montserrat } from 'next/font/google';
+const montserrat = Montserrat({ subsets: ['latin'] });
 
-export function MainLayout({ children, title, keywords, description }: { children?: any; title: string; keywords?: string; description: string }) {
+export function MainLayout({ children, title, keywords, description }: { children?: any; title: string; keywords?: string; description?: string }) {
   const Sidebar = dynamic(() => import('@/components/Sidebar/Sidebar'));
 
   return (
@@ -15,7 +17,7 @@ export function MainLayout({ children, title, keywords, description }: { childre
         <meta charSet="utf-8" />
       </Head>
 
-      <div className={styles.appContainer}>
+      <div className={`${styles.appContainer} ${montserrat.className}`}>
         <Sidebar />
         <main>{children}</main>
       </div>

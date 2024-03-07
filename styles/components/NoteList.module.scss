@@ -1,0 +1,24 @@
+.notesListContainer {
+  padding: 3rem;
+}
+
+.h3 {
+  margin-bottom: 3rem;
+}
+
+.noteList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.note {
+  margin: 0 1rem 1rem 0;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 0.1rem solid var(--border);
+}
+
+.noteTitle,
+.noteContent {
+  margin-bottom: 1rem;
+}
