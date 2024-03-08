@@ -1,12 +1,53 @@
-.label {
+.addNoteContainer {
   display: flex;
   flex-direction: column;
-}
-
-.addNoteContainer {
   padding: 3rem;
 }
 
 .h3 {
   margin-bottom: 3rem;
+}
+
+.submitButton {
+  cursor: pointer;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: 0.1rem solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem 3rem;
+
+  font-size: 1.4rem;
+  background-color: transparent;
+
+  color: var(--color-white-black);
+  transition: 0.2s ease-in-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    width: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.3);
+
+    transition: all 2s ease;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: var(--border);
+    transition: 0.2s ease-in-out;
+    color: #fff;
+  }
 }

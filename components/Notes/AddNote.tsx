@@ -68,6 +68,8 @@ export default function AddNote() {
             color: 'var(--inv-background-color)',
             borderColor: 'var(--border)',
             fontSize: '1.6rem',
+            marginBottom: '1.5rem',
+            width: '30rem',
 
             '--Textarea-placeholderOpacity': 1,
 
@@ -95,7 +97,9 @@ export default function AddNote() {
           }}
         />
 
-        <button type="submit">Сохранить</button>
+        <button type="submit" className={styles.submitButton}>
+          Сохранить
+        </button>
       </form>
     </div>
   );
