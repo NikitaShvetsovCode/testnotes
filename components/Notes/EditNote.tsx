@@ -15,9 +15,8 @@ export default function EditNote() {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const { id } = router.query;
-  const selectedNote = useSelector((state: RootState) =>
-    state.notes.list.find((note: Note) => note.id === (id ? parseInt(id as string, 10) : undefined))
-  );
+  //@ts-ignore
+  const selectedNote = useSelector((state: RootState) => state.notes.list.find((note: Note) => note.id == id));
   const [noteTitle, setNoteTitle] = useState(selectedNote?.title || '');
   const [noteContent, setNoteContent] = useState(selectedNote?.content || '');
   const outerTheme = useTheme();
@@ -30,7 +29,8 @@ export default function EditNote() {
     } else {
       try {
         toast('Заметка успешно исправлена!');
-        await dispatch(editNoteAsync({ id: typeof id === 'string' ? parseInt(id, 10) : NaN, title: noteTitle, content: noteContent }));
+        //@ts-ignore
+        await dispatch(editNoteAsync({ id: id, title: noteTitle, content: noteContent }));
         setNoteTitle('');
         setNoteContent('');
       } catch (error) {

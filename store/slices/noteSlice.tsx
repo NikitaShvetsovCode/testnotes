@@ -19,19 +19,20 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
 });
 
 export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
-  const response = await fetch(`/api/notes/${note.id}`, {
+  const response = await fetch(`/api/notes`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(note),
+
+    body: JSON.stringify({ id: note.id, title: note.title, content: note.content }),
   });
   const data = await response.json();
   return data;
 });
 
-export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: Number) => {
-  const response = await fetch(`/api/notes/${noteId}`, {
+export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
+  const response = await fetch(`/api/notes?id=${noteId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
