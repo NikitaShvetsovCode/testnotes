@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const dbPath = path.resolve('./db.json');
 
-export async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     const data = fs.readFileSync(dbPath, 'utf-8');
     const notes = JSON.parse(data).notes;
