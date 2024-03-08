@@ -34,7 +34,7 @@ export default function NotesList() {
     <div className={styles.notesListContainer}>
       <div className={`h3 ${styles.h3}`}>Заметки</div>
 
-      {status === 'loading' && <Image className="image" src="/preloader.gif" alt="preloader" width="50" height="50" quality={100} />}
+      {status === 'loading' && <Image className={styles.preloader} src="/preloader.gif" alt="preloader" width="50" height="50" quality={100} />}
 
       {status === 'failed' && <div>Ошибка загрузки, проверьте ваше соединение....</div>}
 
