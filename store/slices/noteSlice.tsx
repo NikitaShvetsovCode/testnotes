@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
-  const response = await fetch('http://localhost:3001/notes');
+  const response = await fetch('/api/notes');
   const data = await response.json();
   return data;
 });
 
 export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: { title: string; content: string }) => {
-  const response = await fetch('http://localhost:3001/notes', {
+  const response = await fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
 });
 
 export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
-  const response = await fetch(`http://localhost:3001/notes/${note.id}`, {
+  const response = await fetch(`/api/notes/${note.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
 });
 
 export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: Number) => {
-  const response = await fetch(`http://localhost:3001/notes/${noteId}`, {
+  const response = await fetch(`/api/notes/${noteId}`, {
     method: 'DELETE',
   });
 
