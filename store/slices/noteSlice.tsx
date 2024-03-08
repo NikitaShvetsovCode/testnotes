@@ -31,17 +31,43 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
   return data;
 });
 
+// export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
+//   const response = await fetch(`/api/note/deleteNote`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+
+//   const data = await response.json();
+//   return data;
+// });
+
 export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
-  const response = await fetch(`/api/notes?id=${noteId}`, {
+  const response = await fetch(`/api/note/deleteNote`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
+
+    body: JSON.stringify({ id: noteId }),
   });
 
   const data = await response.json();
   return data;
 });
+
+// export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
+//   const response = await fetch(`/api/notes?id=${noteId}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+
+//   const data = await response.json();
+//   return data;
+// });
 
 const noteSlice = createSlice({
   name: 'notes',
