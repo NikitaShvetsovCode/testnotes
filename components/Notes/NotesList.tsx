@@ -43,13 +43,13 @@ export default function NotesList() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
           label="Поиск..."
           variant="outlined"
+          className={styles.input}
           InputProps={{
             style: {
               fontFamily: 'Montserrat',
               fontSize: '1.6rem',
               color: 'var(--inv-background-color)',
               marginBottom: '1.5rem',
-              width: '30rem',
             },
           }}
           InputLabelProps={{

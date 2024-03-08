@@ -50,6 +50,7 @@ export default function EditNote() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNoteTitle(e.target.value)}
             label="Введите заголовок"
             variant="outlined"
+            className={styles.input}
             InputProps={{
               style: {
                 fontFamily: 'Montserrat',
@@ -73,6 +74,7 @@ export default function EditNote() {
           minRows={10}
           placeholder="Введите текст…"
           value={noteContent}
+          className={styles.textarea}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteContent(e.target.value)}
           sx={{
             fontFamily: 'Montserrat',

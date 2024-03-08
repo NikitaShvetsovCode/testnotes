@@ -43,13 +43,13 @@ export default function AddNote() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNoteTitle(e.target.value)}
             label="Введите заголовок"
             variant="outlined"
+            className={styles.input}
             InputProps={{
               style: {
                 fontFamily: 'Montserrat',
                 fontSize: '1.6rem',
                 color: 'var(--inv-background-color)',
                 marginBottom: '1.5rem',
-                width: '30rem',
               },
             }}
             InputLabelProps={{
@@ -67,6 +67,7 @@ export default function AddNote() {
           placeholder="Введите текст…"
           value={noteContent}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteContent(e.target.value)}
+          className={styles.textarea}
           sx={{
             fontFamily: 'Montserrat',
             background: 'var(--background-color)',
@@ -74,7 +75,6 @@ export default function AddNote() {
             borderColor: 'var(--border)',
             fontSize: '1.6rem',
             marginBottom: '1.5rem',
-            width: '30rem',
 
             '--Textarea-placeholderOpacity': 1,
 

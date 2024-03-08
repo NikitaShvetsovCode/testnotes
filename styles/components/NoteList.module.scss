@@ -49,3 +49,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.input,
+.textarea {
+  width: 30rem;
+
+  @media (max-width: 450px) {
+    width: 25rem;
+  }
+
+  @media (max-width: 400px) {
+    width: 20rem;
+  }
+}
