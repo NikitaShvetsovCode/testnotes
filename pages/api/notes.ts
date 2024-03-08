@@ -52,7 +52,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json(data.notes[updatedNoteIndex]);
   } else if (req.method === 'DELETE') {
-    const { id } = req.query;
+    const { id } = req.body;
 
     if (!id) {
       res.status(400).json({ error: 'ID is required for deleting a note.' });

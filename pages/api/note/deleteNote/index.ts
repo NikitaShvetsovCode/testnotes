@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const dbPath = path.resolve('./db.json');
 
-export default function POST(req: NextApiRequest, res: NextApiResponse) {
+export default function POST(req: any, res: any) {
   const { id } = req.body;
 
   console.log(id);
