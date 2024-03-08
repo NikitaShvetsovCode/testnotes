@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchNotes, editNote, addNoteAsync, deleteNoteAsync } from '@/store/slices/noteSlice';
+import { fetchNotes, deleteNoteAsync } from '@/store/slices/noteSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/index';
 import Image from 'next/image';
 import styles from '@/styles/components/NoteList.module.scss';
 import Link from 'next/link';
@@ -11,7 +12,7 @@ import { customTheme } from '@/components/Input/InputTheme';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 
 export default function NotesList() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { list: notes, status } = useSelector((state: { notes: { list: Note[]; status: string } }) => state.notes);
   const [searchQuery, setSearchQuery] = useState('');
   const outerTheme = useTheme();

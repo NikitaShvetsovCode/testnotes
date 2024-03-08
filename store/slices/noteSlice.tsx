@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction, ActionReducerMapBuilder } from '@reduxjs/toolkit';
+import { RootState } from '../index';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   const response = await fetch('http://localhost:3001/notes');
@@ -46,8 +47,8 @@ const noteSlice = createSlice({
     status: 'idle',
     error: null,
   } as NoteState,
-
-  extraReducers: (builder: ActionReducerMapBuilder) => {
+  reducers: {},
+  extraReducers: (builder: any) => {
     builder
       // Загружающиеся заметки
       .addCase(fetchNotes.pending, (state: NoteState) => {
@@ -61,7 +62,7 @@ const noteSlice = createSlice({
       // Ошибка при получении заметок
       .addCase(fetchNotes.rejected, (state: NoteState, action: PayloadAction<string>) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload;
       })
       // Добавление в наш массив новой заметки
       .addCase(addNoteAsync.fulfilled, (state: NoteState, action: PayloadAction<Note>) => {

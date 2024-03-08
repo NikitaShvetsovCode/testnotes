@@ -1,7 +1,3 @@
-import styles from '@/styles/Home.module.scss';
-import { useEffect } from 'react';
-import { fetchNotes, editNote, addNoteAsync } from '../store/slices/noteSlice';
-import { useSelector, useDispatch } from 'react-redux';
 import { MainLayout } from '@/components/Layout/MainLayout';
 import dynamic from 'next/dynamic';
 

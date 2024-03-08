@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/index';
 import { editNoteAsync } from '@/store/slices/noteSlice';
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';
@@ -11,26 +12,41 @@ import { ThemeProvider, useTheme } from '@mui/material/styles';
 import Textarea from '@mui/joy/Textarea';
 
 export default function EditNote() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const { id } = router.query;
-  const selectedNote = useSelector((state: RootState) => state.notes.list.find((note: Note) => note.id === parseInt(id)));
-  const [noteTitle, setNoteTitle] = useState(selectedNote.title);
-  const [noteContent, setNoteContent] = useState(selectedNote.content);
+  const selectedNote = useSelector((state: RootState) =>
+    state.notes.list.find((note: Note) => note.id === (id ? parseInt(id as string, 10) : undefined))
+  );
+  const [noteTitle, setNoteTitle] = useState(selectedNote?.title || '');
+  const [noteContent, setNoteContent] = useState(selectedNote?.content || '');
   const outerTheme = useTheme();
 
-  const handleEditNote = (e: React.FormEvent) => {
+  const handleEditNote = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (noteTitle.trim() === '' || noteContent.trim() === '') {
       toast('Заголовок и текст должны быть заполнены!');
     } else {
-      toast('Заметка успешно исправлена!');
-      dispatch(editNoteAsync({ id: id, title: noteTitle, content: noteContent }));
-      setNoteTitle('');
-      setNoteContent('');
+      try {
+        toast('Заметка успешно исправлена!');
+        // await dispatch(editNoteAsync({ id: id, title: noteTitle, content: noteContent }));
+
+        await dispatch(editNoteAsync({ id: typeof id === 'string' ? parseInt(id, 10) : NaN, title: noteTitle, content: noteContent }));
+        setNoteTitle('');
+        setNoteContent('');
+      } catch (error) {
+        console.error('Error adding note:', error);
+      }
     }
   };
+
+  useEffect(() => {
+    if (selectedNote) {
+      setNoteTitle(selectedNote.title);
+      setNoteContent(selectedNote.content);
+    }
+  }, [selectedNote]);
 
   return (
     <div className={styles.addNoteContainer}>

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/index';
 import { addNoteAsync } from '@/store/slices/noteSlice';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
@@ -9,21 +10,25 @@ import { ThemeProvider, useTheme } from '@mui/material/styles';
 import Textarea from '@mui/joy/Textarea';
 
 export default function AddNote() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
   const outerTheme = useTheme();
 
-  const handleAddNote = (e: React.FormEvent) => {
+  const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (noteTitle.trim() === '' || noteContent.trim() === '') {
       toast('Заголовок и текст должны быть заполнены!');
     } else {
-      toast('Заметка успешно добавлена!');
-      dispatch(addNoteAsync({ title: noteTitle, content: noteContent }));
-      setNoteTitle('');
-      setNoteContent('');
+      try {
+        toast('Заметка успешно добавлена!');
+        await dispatch(addNoteAsync({ title: noteTitle, content: noteContent } as Note));
+        setNoteTitle('');
+        setNoteContent('');
+      } catch (error) {
+        console.error('Error adding note:', error);
+      }
     }
   };
 
