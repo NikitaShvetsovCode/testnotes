@@ -38,9 +38,6 @@ export default function NotesList() {
 
       {status === 'failed' && <div>Ошибка загрузки, проверьте ваше соединение....</div>}
 
-      {/* <input type="text" placeholder="Поиск..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={styles.searchInput} />
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-
       <ThemeProvider theme={customTheme(outerTheme)}>
         <TextField
           value={searchQuery}

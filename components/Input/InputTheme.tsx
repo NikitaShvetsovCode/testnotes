@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider, Theme, useTheme } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
 
 export const customTheme = (outerTheme: Theme) =>
   createTheme({
@@ -11,8 +10,6 @@ export const customTheme = (outerTheme: Theme) =>
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            borderColor: 'transparent',
-
             '& fieldset': {
               borderColor: 'var(--border)',
             },
