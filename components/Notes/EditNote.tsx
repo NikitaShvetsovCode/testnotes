@@ -39,13 +39,6 @@ export default function EditNote() {
     }
   };
 
-  useEffect(() => {
-    if (selectedNote) {
-      setNoteTitle(selectedNote.title);
-      setNoteContent(selectedNote.content);
-    }
-  }, [selectedNote]);
-
   return (
     <div className={styles.addNoteContainer}>
       <form onSubmit={handleEditNote}>
