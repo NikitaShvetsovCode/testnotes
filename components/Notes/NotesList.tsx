@@ -50,6 +50,7 @@ export default function NotesList() {
               fontSize: '1.6rem',
               color: 'var(--inv-background-color)',
               marginBottom: '1.5rem',
+              width: '30rem',
             },
           }}
           InputLabelProps={{
@@ -64,20 +65,24 @@ export default function NotesList() {
 
       {status === 'succeeded' && (
         <div className={styles.noteList}>
-          {filteredNotes.map((note: Note) => (
-            <div className={styles.note} key={note.id}>
-              <div className={styles.noteActions}>
-                <Link href={`/editNote/${note.id}`}>
-                  <FaRegEdit />
-                </Link>
+          {filteredNotes.length === 0 ? (
+            <div>Заметок нет...</div>
+          ) : (
+            filteredNotes.map((note: Note) => (
+              <div className={styles.note} key={note.id}>
+                <div className={styles.noteActions}>
+                  <Link href={`/editNote/${note.id}`}>
+                    <FaRegEdit />
+                  </Link>
 
-                <IoClose className={styles.buttonDelete} onClick={() => handleDeleteNote(note.id)} fontSize={23} />
+                  <IoClose className={styles.buttonDelete} onClick={() => handleDeleteNote(note.id)} fontSize={23} />
+                </div>
+
+                <div className={styles.noteTitle}>{note.title}</div>
+                <div className={styles.noteContent}>{note.content}</div>
               </div>
-
-              <div className={styles.noteTitle}>{note.title}</div>
-              <div className={styles.noteContent}>{note.content}</div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       )}
     </div>
