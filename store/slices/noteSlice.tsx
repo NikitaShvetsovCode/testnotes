@@ -18,14 +18,23 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
   return data;
 });
 
-export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (updatedNote: Note) => {
-  const response = await fetch(`http://localhost:3001/notes/${updatedNote.id}`, {
+export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
+  const response = await fetch(`http://localhost:3001/notes/${note.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updatedNote),
+    body: JSON.stringify(note),
   });
+  const data = await response.json();
+  return data;
+});
+
+export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: Number) => {
+  const response = await fetch(`http://localhost:3001/notes/${noteId}`, {
+    method: 'DELETE',
+  });
+
   const data = await response.json();
   return data;
 });
@@ -68,6 +77,12 @@ const noteSlice = createSlice({
 
         // Заменяем новой информацией по айди в нашем массиве
         state.list[updatedNoteIndex] = action.payload;
+      })
+      // Удаление заметки
+      .addCase(deleteNoteAsync.fulfilled, (state: NoteState, action: PayloadAction<{ noteId: number; data: any }>) => {
+        state.status = 'succeeded';
+        // Удаление заметки из массива по ее id
+        state.list = state.list.filter((note: Note) => note.id !== action.payload.noteId);
       });
   },
 });
