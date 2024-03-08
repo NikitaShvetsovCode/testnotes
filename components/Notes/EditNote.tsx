@@ -57,7 +57,6 @@ export default function EditNote() {
                 fontSize: '1.6rem',
                 color: 'var(--inv-background-color)',
                 marginBottom: '1.5rem',
-                width: '30rem',
               },
             }}
             InputLabelProps={{
