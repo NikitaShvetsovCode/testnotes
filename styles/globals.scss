@@ -17,6 +17,8 @@ body {
 
   background: var(--background-color);
   color: var(--inv-background-color);
+
+  overflow-x: hidden;
 }
 
 :root[data-theme='dark'] {

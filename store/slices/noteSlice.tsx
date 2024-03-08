@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction, ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { RootState } from '../index';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   const response = await fetch('http://localhost:3001/notes');
