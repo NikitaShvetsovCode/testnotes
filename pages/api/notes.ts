@@ -53,7 +53,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json(data.notes[updatedNoteIndex]);
   } else if (req.method === 'DELETE') {
-    console.log(req, 'ЭТО ЗАПРОС НА УДАЛЕНИЕ');
     const { id } = req.query;
 
     if (!id) {
@@ -62,7 +61,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-    const deletedNoteIndex = data.notes.findIndex((note: any) => note.id === parseInt(id));
+    const deletedNoteIndex = data.notes.findIndex((note: any) => note.id === parseInt(id as string, 10));
 
     if (deletedNoteIndex === -1) {
       res.status(404).json({ error: 'Note not found.' });
