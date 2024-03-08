@@ -30,8 +30,6 @@ export default function EditNote() {
     } else {
       try {
         toast('Заметка успешно исправлена!');
-        // await dispatch(editNoteAsync({ id: id, title: noteTitle, content: noteContent }));
-
         await dispatch(editNoteAsync({ id: typeof id === 'string' ? parseInt(id, 10) : NaN, title: noteTitle, content: noteContent }));
         setNoteTitle('');
         setNoteContent('');

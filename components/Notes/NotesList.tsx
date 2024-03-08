@@ -37,8 +37,6 @@ export default function NotesList() {
 
       {status === 'loading' && <Image className={styles.preloader} src="/preloader.gif" alt="preloader" width="50" height="50" quality={100} />}
 
-      {status === 'failed' && <div>Ошибка загрузки, проверьте ваше соединение....</div>}
-
       <ThemeProvider theme={customTheme(outerTheme)}>
         <TextField
           value={searchQuery}
@@ -63,6 +61,8 @@ export default function NotesList() {
           }}
         />
       </ThemeProvider>
+
+      {status === 'failed' && <div>Ошибка загрузки, проверьте ваше соединение....</div>}
 
       {status === 'succeeded' && (
         <div className={styles.noteList}>
