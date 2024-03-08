@@ -5,6 +5,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const dbPath = path.resolve('./db.json');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log('Request method:', req.method);
+  console.log('Request URL:', req.url);
+  console.log('Request body:', req.body);
+  console.log('Request query:', req.query);
+
   if (req.method === 'GET') {
     const data = fs.readFileSync(dbPath, 'utf-8');
     const notes = JSON.parse(data).notes;
@@ -18,7 +23,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const newNote = {
-      id: Date.now(),
+      id: Date.now().toString(),
       title,
       content,
     };
@@ -40,7 +45,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-    const updatedNoteIndex = data.notes.findIndex((note: any) => note.id === id);
+    const updatedNoteIndex = data.notes.findIndex((note: any) => note.id === parseInt(id as string, 10));
 
     if (updatedNoteIndex === -1) {
       res.status(404).json({ error: 'Note not found.' });
@@ -53,6 +58,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json(data.notes[updatedNoteIndex]);
   } else if (req.method === 'DELETE') {
+    console.log('Request query id:', req.query.id);
+
     const { id } = req.query;
 
     if (!id) {

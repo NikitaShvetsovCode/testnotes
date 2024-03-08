@@ -33,6 +33,9 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
 export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: Number) => {
   const response = await fetch(`/api/notes/${noteId}`, {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
   const data = await response.json();
