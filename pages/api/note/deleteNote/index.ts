@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const dbPath = path.resolve('./db.json');
 
-export default function DELETE(req: NextApiRequest, res: NextApiResponse) {
+export default function POST(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.body;
 
   console.log(id);
