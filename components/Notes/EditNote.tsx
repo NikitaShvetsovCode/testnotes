@@ -83,7 +83,6 @@ export default function EditNote() {
             borderColor: 'var(--border)',
             fontSize: '1.6rem',
             marginBottom: '1.5rem',
-            width: '30rem',
 
             '--Textarea-placeholderOpacity': 1,
 
