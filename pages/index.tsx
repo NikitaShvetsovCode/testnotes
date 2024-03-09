@@ -4,7 +4,10 @@ import { ipAddress } from '@vercel/edge';
 
 export default function Home() {
   const NotesList = dynamic(() => import('@/components/Notes/NotesList'));
-  const { ip } = ipAddress(request);
+  // const ip = ipAddress(Request);
+  const req = new Request('https://testnotes-seven.vercel.app/');
+
+  const ip = ipAddress(req);
 
   console.log(ip, 'IPADRESS');
   return (
