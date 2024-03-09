@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
-  const response = await fetch('/api/notes');
+  const response = await fetch('/api/notesDB');
   const data = await response.json();
   return data;
 });
@@ -48,7 +48,7 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
 
 export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
   console.log(noteId);
-  const response = await fetch(`/api/note/deleteNote`, {
+  const response = await fetch(`/api/notesDB`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

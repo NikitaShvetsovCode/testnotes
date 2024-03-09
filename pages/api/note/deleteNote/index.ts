@@ -27,7 +27,7 @@ export default async function DELETE(req: any, res: any) {
 
     fs.writeFileSync(dbPath, JSON.stringify(data));
 
-    res.status(200).json({ message: 'Note deleted successfully.', deletedNote });
+    await res.status(200).json({ message: 'Note deleted successfully.', deletedNote });
   } catch (error) {
     console.error('Ошибка из функции API', error);
   }
