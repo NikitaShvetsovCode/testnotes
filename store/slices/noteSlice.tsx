@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ObjectId } from 'mongodb';
 
 // фетч в виде thunk для получения заметок
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {

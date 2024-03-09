@@ -44,13 +44,13 @@ export default function NotesList() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
           label="Поиск..."
           variant="outlined"
-          className={styles.input}
+          className={`${styles.input} ${styles.inputSearch}`}
+          autoComplete="off"
           InputProps={{
             style: {
               fontFamily: 'Montserrat',
               fontSize: '1.6rem',
               color: 'var(--inv-background-color)',
-              marginBottom: '1.5rem',
             },
           }}
           InputLabelProps={{
@@ -70,8 +70,8 @@ export default function NotesList() {
           {filteredNotes.length === 0 ? (
             <div>Заметок нет...</div>
           ) : (
-            filteredNotes.map((note: any) => (
-              <div className={styles.note} key={note.id}>
+            filteredNotes.map((note: Note) => (
+              <div className={styles.note} key={note._id}>
                 <div className={styles.noteActions}>
                   <Link href={`/editNote/${note._id}`}>
                     <FaRegEdit />

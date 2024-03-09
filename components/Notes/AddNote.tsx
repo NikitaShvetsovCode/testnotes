@@ -43,6 +43,7 @@ export default function AddNote() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNoteTitle(e.target.value)}
             label="Введите заголовок"
             variant="outlined"
+            autoComplete="off"
             className={styles.input}
             InputProps={{
               style: {
