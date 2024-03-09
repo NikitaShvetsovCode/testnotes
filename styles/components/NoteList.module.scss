@@ -53,6 +53,11 @@
   transform: translate(-50%, -10%);
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 500px) {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .input,
