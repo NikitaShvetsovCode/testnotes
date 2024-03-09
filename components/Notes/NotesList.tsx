@@ -21,7 +21,8 @@ export default function NotesList() {
     dispatch(fetchNotes());
   }, [dispatch]);
 
-  const handleDeleteNote = async (noteId: number) => {
+  const handleDeleteNote = async (noteId: any) => {
+    console.log(noteId);
     await dispatch(deleteNoteAsync(noteId));
 
     await dispatch(fetchNotes());
@@ -69,14 +70,14 @@ export default function NotesList() {
           {filteredNotes.length === 0 ? (
             <div>Заметок нет...</div>
           ) : (
-            filteredNotes.map((note: Note) => (
+            filteredNotes.map((note: any) => (
               <div className={styles.note} key={note.id}>
                 <div className={styles.noteActions}>
                   <Link href={`/editNote/${note.id}`}>
                     <FaRegEdit />
                   </Link>
 
-                  <IoClose className={styles.buttonDelete} onClick={() => handleDeleteNote(note.id)} fontSize={23} />
+                  <IoClose className={styles.buttonDelete} onClick={() => handleDeleteNote(note._id)} fontSize={23} />
                 </div>
 
                 <div className={styles.noteTitle}>{note.title}</div>

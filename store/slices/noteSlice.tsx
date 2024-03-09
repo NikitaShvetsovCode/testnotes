@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { ObjectId } from 'mongodb';
 
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   const response = await fetch('/api/notesDB');
@@ -7,7 +8,7 @@ export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
 });
 
 export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: { title: string; content: string }) => {
-  const response = await fetch('/api/notes', {
+  const response = await fetch('/api/notesDB', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
 });
 
 export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
-  const response = await fetch(`/api/notes`, {
+  const response = await fetch(`/api/notesDB`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -31,30 +32,14 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
   return data;
 });
 
-// export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
-//   console.log(noteId);
-//   const response = await fetch(`/api/notes`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-
-//     body: JSON.stringify({ id: noteId }),
-//   });
-
-//   const data = await response.json();
-//   return data;
-// });
-
-export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: number) => {
-  console.log(noteId);
+export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: any) => {
   const response = await fetch(`/api/notesDB`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
 
-    body: JSON.stringify({ id: noteId }),
+    body: JSON.stringify({ deleteId: noteId }),
   });
 
   const data = await response.json();
