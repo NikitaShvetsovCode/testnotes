@@ -1,6 +1,5 @@
 import Note from './db/models/Notes';
 import connectMongoDB from './db/index';
-import { ipAddress } from '@vercel/edge';
 
 connectMongoDB();
 
