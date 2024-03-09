@@ -30,8 +30,6 @@ export default async function handler(req: any, res: any) {
   } else if (req.method === 'PUT') {
     const { id, title, content } = req.body;
 
-    // console.log(id, updatedTitle, updatedContent);
-
     if (!id || !title || !content) {
       res.status(400).json({ error: 'ID, updatedTitle, and updatedContent are required for editing a note.' });
       return;
