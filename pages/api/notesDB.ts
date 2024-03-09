@@ -1,9 +1,10 @@
 import Note from './db/models/Notes';
 import connectMongoDB from './db/index';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 connectMongoDB();
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
       const notes = await Note.find();

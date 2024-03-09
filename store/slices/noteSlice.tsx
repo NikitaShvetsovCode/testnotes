@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ObjectId } from 'mongodb';
 
+// фетч в виде thunk для получения заметок
 export const fetchNotes = createAsyncThunk('notes/fetchNotes', async () => {
   const response = await fetch('/api/notesDB');
   const data = await response.json();
   return data;
 });
 
+// фетч в виде thunk для добавления заметки
 export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: { title: string; content: string }) => {
   const response = await fetch('/api/notesDB', {
     method: 'POST',
@@ -19,7 +21,8 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
   return data;
 });
 
-export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: any) => {
+// фетч в виде thunk для редактирования заметки
+export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
   console.log(note, 'NOTEEEEE');
   const response = await fetch(`/api/notesDB`, {
     method: 'PUT',
@@ -33,7 +36,8 @@ export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note
   return data;
 });
 
-export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: any) => {
+// фетч в виде thunk для удаления заметки
+export const deleteNoteAsync = createAsyncThunk('notes/deleteNoteAsync', async (noteId: string) => {
   const response = await fetch(`/api/notesDB`, {
     method: 'DELETE',
     headers: {
@@ -81,16 +85,16 @@ const noteSlice = createSlice({
         state.status = 'succeeded';
 
         // Находим заметку, в которой id совпадает с той которую изменяли
-        const updatedNoteIndex = state.list.findIndex((note: Note) => note.id === action.payload.id);
+        const updatedNoteIndex = state.list.findIndex((note: Note) => note._id === action.payload._id);
 
         // Заменяем новой информацией по айди в нашем массиве
         state.list[updatedNoteIndex] = action.payload;
       })
       // Удаление заметки
-      .addCase(deleteNoteAsync.fulfilled, (state: NoteState, action: PayloadAction<{ noteId: number; data: any }>) => {
+      .addCase(deleteNoteAsync.fulfilled, (state: NoteState, action: PayloadAction<{ noteId: string; data: any }>) => {
         state.status = 'succeeded';
         // Удаление заметки из массива по ее id
-        state.list = state.list.filter((note: Note) => note.id !== action.payload.noteId);
+        state.list = state.list.filter((note: Note) => note._id !== action.payload.noteId);
       });
   },
 });
