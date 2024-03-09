@@ -1,5 +1,10 @@
 .notesListContainer {
   padding: 3rem;
+  min-width: 85vw;
+
+  @media (max-width: 500px) {
+    padding: 3rem 1.5rem 3rem 2rem;
+  }
 }
 
 .h3 {
@@ -52,14 +57,14 @@
 
 .input,
 .textarea {
-  width: 30rem;
+  width: 35rem;
 
-  @media (max-width: 450px) {
-    width: 25rem;
+  @media (max-width: 500px) {
+    width: 90%;
   }
 
   @media (max-width: 400px) {
-    width: 20rem;
+    width: 95%;
   }
 }
 
