@@ -5,10 +5,6 @@ import { ipAddress } from '@vercel/edge';
 connectMongoDB();
 
 export default async function handler(req: any, res: any) {
-  const ip = ipAddress(req);
-
-  console.log(ip, 'IPADRESS');
-
   if (req.method === 'GET') {
     try {
       const notes = await Note.find();
