@@ -29,7 +29,7 @@ export default function NotesList() {
   };
 
   const filteredNotes = notes.filter(
-    (note: Note) => note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.content.toLowerCase().includes(searchQuery.toLowerCase())
+    (note: any) => note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.content.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -73,7 +73,7 @@ export default function NotesList() {
             filteredNotes.map((note: any) => (
               <div className={styles.note} key={note.id}>
                 <div className={styles.noteActions}>
-                  <Link href={`/editNote/${note.id}`}>
+                  <Link href={`/editNote/${note._id}`}>
                     <FaRegEdit />
                   </Link>
 

@@ -19,14 +19,15 @@ export const addNoteAsync = createAsyncThunk('notes/addNoteAsync', async (note: 
   return data;
 });
 
-export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: Note) => {
+export const editNoteAsync = createAsyncThunk('notes/editNoteAsync', async (note: any) => {
+  console.log(note, 'NOTEEEEE');
   const response = await fetch(`/api/notesDB`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
 
-    body: JSON.stringify({ id: note.id, title: note.title, content: note.content }),
+    body: JSON.stringify({ id: note._id, title: note.title, content: note.content }),
   });
   const data = await response.json();
   return data;

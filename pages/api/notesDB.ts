@@ -28,15 +28,17 @@ export default async function handler(req: any, res: any) {
       res.status(500).json({ error: 'Internal Server Error.' });
     }
   } else if (req.method === 'PUT') {
-    const { id, updatedTitle, updatedContent } = req.body;
+    const { id, title, content } = req.body;
 
-    if (!id || !updatedTitle || !updatedContent) {
+    // console.log(id, updatedTitle, updatedContent);
+
+    if (!id || !title || !content) {
       res.status(400).json({ error: 'ID, updatedTitle, and updatedContent are required for editing a note.' });
       return;
     }
 
     try {
-      const updatedNote = await Note.findByIdAndUpdate(id, { title: updatedTitle, content: updatedContent }, { new: true });
+      const updatedNote = await Note.findByIdAndUpdate(id, { title: title, content: content }, { new: true });
 
       if (!updatedNote) {
         res.status(404).json({ error: 'Note not found.' });
